@@ -21,6 +21,9 @@
 
 namespace Mageplaza\LoginAsCustomer\Helper;
 
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 
 /**
@@ -30,4 +33,68 @@ use Mageplaza\Core\Helper\AbstractData;
 class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mploginascustomer';
+
+    /**
+     * @var \Magento\Framework\AuthorizationInterface
+     */
+    protected $_authorization;
+
+    /**
+     * @var \Magento\Framework\Math\Random
+     */
+    protected $mathRandom;
+
+    /**
+     * Data constructor.
+     *
+     * @param Context $context
+     * @param ObjectManagerInterface $objectManager
+     * @param StoreManagerInterface $storeManager
+     * @param \Magento\Framework\AuthorizationInterface $authorization
+     * @param \Magento\Framework\Math\Random $random
+     */
+    public function __construct(
+        Context $context,
+        ObjectManagerInterface $objectManager,
+        StoreManagerInterface $storeManager,
+        \Magento\Framework\AuthorizationInterface $authorization,
+        \Magento\Framework\Math\Random $random
+    )
+    {
+        $this->_authorization = $authorization;
+        $this->mathRandom = $random;
+
+        parent::__construct($context, $objectManager, $storeManager);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllowLogin()
+    {
+        return $this->_authorization->isAllowed('Mageplaza_LoginAsCustomer::allow');
+    }
+
+    /**
+     * @return string
+     */
+    public function getLoginToken()
+    {
+        return $this->mathRandom->getUniqueHash();
+    }
+
+    /**
+     * @param $customer
+     *
+     * @return \Magento\Store\Api\Data\StoreInterface|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getStore($customer)
+    {
+        if ($storeId = $customer->getStoreId()) {
+            return $this->storeManager->getStore($storeId);
+        }
+
+        return $this->storeManager->getDefaultStoreView();
+    }
 }
