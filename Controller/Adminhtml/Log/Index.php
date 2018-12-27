@@ -19,18 +19,16 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-namespace Mageplaza\LoginAsCustomer\Controller\Adminhtml;
+namespace Mageplaza\LoginAsCustomer\Controller\Adminhtml\Log;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Customer\Model\CustomerFactory;
-use Mageplaza\LoginAsCustomer\Helper\Data;
-use Mageplaza\LoginAsCustomer\Model\LogFactory;
+use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Log
- * @package Mageplaza\LoginAsCustomer\Controller\Adminhtml
+ * Class Index
+ * @package Mageplaza\LoginAsCustomer\Controller\Adminhtml\Log
  */
-abstract class Log extends \Magento\Backend\App\Action
+class Index extends \Magento\Backend\App\Action
 {
     /**
      * Authorization level of a basic admin session
@@ -40,39 +38,38 @@ abstract class Log extends \Magento\Backend\App\Action
     const ADMIN_RESOURCE = 'Mageplaza_LoginAsCustomer::logs';
 
     /**
-     * @var LogFactory
+     * Page result factory
+     *
+     * @var \Magento\Framework\View\Result\PageFactory
      */
-    protected $_logFactory;
-
-    /**
-     * @var CustomerFactory
-     */
-    protected $_customerFactory;
-
-    /**
-     * @var Data
-     */
-    protected $_helper;
+    public $resultPageFactory;
 
     /**
      * Index constructor.
      *
-     * @param Context $context
-     * @param CustomerFactory $customerFactory
-     * @param LogFactory $logFactory
-     * @param Data $helper
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         Context $context,
-        CustomerFactory $customerFactory,
-        LogFactory $logFactory,
-        Data $helper
+        PageFactory $resultPageFactory
     )
     {
-        $this->_customerFactory = $customerFactory;
-        $this->_logFactory = $logFactory;
-        $this->_helper = $helper;
+        $this->resultPageFactory = $resultPageFactory;
 
         parent::__construct($context);
+    }
+
+    /**
+     * execute the action
+     *
+     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\View\Result\Page
+     */
+    public function execute()
+    {
+        $resultPage = $this->resultPageFactory->create();
+        $resultPage->getConfig()->getTitle()->prepend(__('Login as Customer Logs'));
+
+        return $resultPage;
     }
 }

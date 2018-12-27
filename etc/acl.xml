@@ -24,11 +24,13 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Magento_Customer::customer">
-                    <resource id="Mageplaza_LoginAsCustomer::loginascustomer" title="Login As Customer" translate="title" sortOrder="70">
-                        <resource id="Mageplaza_LoginAsCustomer::allow" title="Allow Login" translate="title" sortOrder="20"/>
-                        <resource id="Mageplaza_LoginAsCustomer::logs" title="Logs" translate="title" sortOrder="20"/>
+                <resource id="Magento_Reports::report">
+                    <resource id="Magento_Reports::customers">
+                        <resource id="Mageplaza_LoginAsCustomer::logs" title="Admin Login Logs" translate="title" sortOrder="100"/>
                     </resource>
+                </resource>
+                <resource id="Magento_Customer::customer">
+                    <resource id="Mageplaza_LoginAsCustomer::allow" title="Allow Admin Login" translate="title" sortOrder="100"/>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">

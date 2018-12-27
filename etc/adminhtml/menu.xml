@@ -22,8 +22,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Mageplaza_LoginAsCustomer::loginascustomer" title="Login As Customer" module="Mageplaza_LoginAsCustomer" sortOrder="70" resource="Mageplaza_LoginAsCustomer::menu" parent="Magento_Customer::customer"/>
-        <add id="Mageplaza_LoginAsCustomer::logs" title="Logs" module="Mageplaza_LoginAsCustomer" sortOrder="20" parent="Mageplaza_LoginAsCustomer::loginascustomer" action="mploginascustomer/logs/index" resource="Mageplaza_LoginAsCustomer::logs"/>
-        <add id="Mageplaza_LoginAsCustomer::configuration" title="Configuration" module="Mageplaza_LoginAsCustomer" sortOrder="90" action="adminhtml/system_config/edit/section/mploginascustomer" resource="Mageplaza_LoginAsCustomer::configuration" parent="Mageplaza_LoginAsCustomer::loginascustomer"/>
+        <add id="Mageplaza_LoginAsCustomer::logs" title="Admin Login Logs" module="Mageplaza_LoginAsCustomer" sortOrder="100" parent="Magento_Reports::report_customers" action="mploginascustomer/log/index" resource="Mageplaza_LoginAsCustomer::logs"/>
     </menu>
 </config>
