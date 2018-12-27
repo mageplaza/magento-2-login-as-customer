@@ -21,6 +21,7 @@
 
 namespace Mageplaza\LoginAsCustomer\Helper;
 
+use Magento\Customer\Model\Customer;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -84,7 +85,7 @@ class Data extends AbstractData
     }
 
     /**
-     * @param $customer
+     * @param Customer $customer
      *
      * @return \Magento\Store\Api\Data\StoreInterface|null
      * @throws \Magento\Framework\Exception\NoSuchEntityException

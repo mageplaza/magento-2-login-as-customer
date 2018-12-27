@@ -80,6 +80,6 @@ class Button extends GenericButton implements ButtonProviderInterface
      */
     public function getLoginUrl()
     {
-        return $this->getUrl('mploginascustomer/index/login', ['id' => $this->getCustomerId()]);
+        return $this->getUrl('mploginascustomer/login/index', ['id' => $this->getCustomerId()]);
     }
 }

@@ -23,16 +23,12 @@ namespace Mageplaza\LoginAsCustomer\Controller\Login;
 
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Account\Redirect as AccountRedirect;
-use Mageplaza\LoginAsCustomer\Model\LogFactory;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Data\Form\FormKey\Validator;
-use Magento\Framework\Exception\AuthenticationException;
-use Magento\Framework\Exception\EmailNotConfirmedException;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\State\UserLockedException;
+use Mageplaza\LoginAsCustomer\Model\LogFactory;
 
 /**
  * Class Index
@@ -75,15 +71,26 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     private $cookieMetadataManager;
 
+    /**
+     * @var LogFactory
+     */
     protected $_logFactory;
 
     /**
+     * @var CustomerUrl
+     */
+    protected $customerUrl;
+
+    /**
+     * Index constructor.
+     *
      * @param Context $context
      * @param Session $customerSession
      * @param AccountManagementInterface $customerAccountManagement
      * @param CustomerUrl $customerHelperData
      * @param Validator $formKeyValidator
      * @param AccountRedirect $accountRedirect
+     * @param LogFactory $logFactory
      */
     public function __construct(
         Context $context,
@@ -157,17 +164,14 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * Login post action
-     *
-     * @return \Magento\Framework\Controller\Result\Redirect
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Forward|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
         $token = $this->getRequest()->getParam('key');
 
         $log = $this->_logFactory->create()->load($token, 'token');
-        if(!$log || !$log->getId() || $log->getIsLoggedIn()){
+        if (!$log || !$log->getId() || $log->getIsLoggedIn()) {
             return $this->_redirect('noRoute');
         }
 
@@ -175,11 +179,17 @@ class Index extends \Magento\Framework\App\Action\Action
         try {
             $this->session->loginById($customerId);
             $this->session->regenerateId();
-            if ($this->getCookieManager()->getCookie('mage-cache-sessid')) {
-                $metadata = $this->getCookieMetadataFactory()->createCookieMetadata();
-                $metadata->setPath('/');
-                $this->getCookieManager()->deleteCookie('mage-cache-sessid', $metadata);
-            }
+            echo 'brian success 1';
+            return true;
+
+            $log->setIsLoggedIn(true)
+                ->save();
+
+//            if ($this->getCookieManager()->getCookie('mage-cache-sessid')) {
+//                $metadata = $this->getCookieMetadataFactory()->createCookieMetadata();
+//                $metadata->setPath('/');
+//                $this->getCookieManager()->deleteCookie('mage-cache-sessid', $metadata);
+//            }
             $redirectUrl = $this->accountRedirect->getRedirectCookie();
             if (!$this->getScopeConfig()->getValue('customer/startup/redirect_dashboard') && $redirectUrl) {
                 $this->accountRedirect->clearRedirectCookie();
@@ -189,62 +199,11 @@ class Index extends \Magento\Framework\App\Action\Action
 
                 return $resultRedirect;
             }
-        } catch (EmailNotConfirmedException $e) {
-            $value = $this->customerUrl->getEmailConfirmationUrl($login['username']);
-            $message = __(
-                'This account is not confirmed. <a href="%1">Click here</a> to resend confirmation email.',
-                $value
+        } catch (\Exception $e) {
+            // PA DSS violation: throwing or logging an exception here can disclose customer password
+            $this->messageManager->addError(
+                __('An unspecified error occurred. Please contact us for assistance.')
             );
-        }
-
-            $login = $this->getRequest()->getPost('login');
-            if (!empty($login['username']) && !empty($login['password'])) {
-                try {
-                    $customer = $this->customerAccountManagement->authenticate($login['username'], $login['password']);
-                    $this->session->setCustomerDataAsLoggedIn($customer);
-                    $this->session->regenerateId();
-                    if ($this->getCookieManager()->getCookie('mage-cache-sessid')) {
-                        $metadata = $this->getCookieMetadataFactory()->createCookieMetadata();
-                        $metadata->setPath('/');
-                        $this->getCookieManager()->deleteCookie('mage-cache-sessid', $metadata);
-                    }
-                    $redirectUrl = $this->accountRedirect->getRedirectCookie();
-                    if (!$this->getScopeConfig()->getValue('customer/startup/redirect_dashboard') && $redirectUrl) {
-                        $this->accountRedirect->clearRedirectCookie();
-                        $resultRedirect = $this->resultRedirectFactory->create();
-                        // URL is checked to be internal in $this->_redirect->success()
-                        $resultRedirect->setUrl($this->_redirect->success($redirectUrl));
-
-                        return $resultRedirect;
-                    }
-                } catch (EmailNotConfirmedException $e) {
-                    $value = $this->customerUrl->getEmailConfirmationUrl($login['username']);
-                    $message = __(
-                        'This account is not confirmed. <a href="%1">Click here</a> to resend confirmation email.',
-                        $value
-                    );
-                } catch (UserLockedException $e) {
-                    $message = __(
-                        'You did not sign in correctly or your account is temporarily disabled.'
-                    );
-                } catch (AuthenticationException $e) {
-                    $message = __('You did not sign in correctly or your account is temporarily disabled.');
-                } catch (LocalizedException $e) {
-                    $message = $e->getMessage();
-                } catch (\Exception $e) {
-                    // PA DSS violation: throwing or logging an exception here can disclose customer password
-                    $this->messageManager->addError(
-                        __('An unspecified error occurred. Please contact us for assistance.')
-                    );
-                } finally {
-                    if (isset($message)) {
-                        $this->messageManager->addError($message);
-                        $this->session->setUsername($login['username']);
-                    }
-                }
-            } else {
-                $this->messageManager->addError(__('A login and a password are required.'));
-            }
         }
 
         return $this->accountRedirect->getRedirect();

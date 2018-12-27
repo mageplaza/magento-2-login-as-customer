@@ -52,7 +52,7 @@ class Index extends \Magento\Backend\App\Action
     /**
      * @var Data
      */
-    protected $_helper;
+    protected $_loginHelper;
 
     /**
      * Index constructor.
@@ -71,7 +71,7 @@ class Index extends \Magento\Backend\App\Action
     {
         $this->_customerFactory = $customerFactory;
         $this->_logFactory = $logFactory;
-        $this->_helper = $helper;
+        $this->_loginHelper = $helper;
 
         parent::__construct($context);
     }
@@ -91,7 +91,7 @@ class Index extends \Magento\Backend\App\Action
         }
 
         $user = $this->_auth->getUser();
-        $token = $this->_helper->getLoginToken();
+        $token = $this->_loginHelper->getLoginToken();
 
         $log = $this->_logFactory->create();
         $log->setData([
@@ -104,7 +104,7 @@ class Index extends \Magento\Backend\App\Action
             'customer_name' => $customer->getName()
         ])->save();
 
-        $store = $this->_helper->getStore($customer);
+        $store = $this->_loginHelper->getStore($customer);
         $loginUrl = $this->_objectManager->create(Url::class)
             ->setScope($store)
             ->getUrl('mploginascustomer/login/index', ['key' => $token]);

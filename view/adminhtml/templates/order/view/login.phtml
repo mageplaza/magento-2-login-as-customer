@@ -36,7 +36,7 @@ if ($customerId && $helper->isAllowLogin()) :
         <th></th>
         <td>
             <button type="button" id="mp-login-as-customer"
-                    onclick="window.open('<?= $block->getUrl('mploginascustomer/index/login', ['id' => $customerId]) ?>')">
+                    onclick="window.open('<?= $block->getUrl('mploginascustomer/login/index', ['id' => $customerId]) ?>')">
                 <span><?= __('Login as Customer') ?></span>
             </button>
         </td>
