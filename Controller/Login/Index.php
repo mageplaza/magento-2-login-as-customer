@@ -81,6 +81,10 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     protected $customerUrl;
 
+    protected $checkoutSession;
+
+    protected $checkoutCart;
+
     /**
      * Index constructor.
      *
@@ -99,6 +103,8 @@ class Index extends \Magento\Framework\App\Action\Action
         CustomerUrl $customerHelperData,
         Validator $formKeyValidator,
         AccountRedirect $accountRedirect,
+        \Magento\Checkout\Model\Session $checkoutSession,
+        \Magento\Checkout\Model\Cart $checkoutCart,
         LogFactory $logFactory
     )
     {
@@ -107,6 +113,8 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->customerUrl = $customerHelperData;
         $this->formKeyValidator = $formKeyValidator;
         $this->accountRedirect = $accountRedirect;
+        $this->checkoutSession = $checkoutSession;
+        $this->checkoutCart = $checkoutCart;
         $this->_logFactory = $logFactory;
 
         parent::__construct($context);
@@ -175,30 +183,32 @@ class Index extends \Magento\Framework\App\Action\Action
             return $this->_redirect('noRoute');
         }
 
-        $customerId = $log->getCustomerId();
         try {
-            $this->session->loginById($customerId);
+            if ($this->session->isLoggedIn()) {
+                $this->session->logout();
+            } else {
+                $this->checkoutCart->truncate()->save();
+            }
+        } catch (\Exception $e) {
+            $this->messageManager->addNoticeMessage(__('Cannot truncate cart item.'));
+        }
+
+        try {
+            $this->session->loginById($log->getCustomerId());
             $this->session->regenerateId();
 
             $log->setIsLoggedIn(true)
                 ->save();
 
-//            if ($this->getCookieManager()->getCookie('mage-cache-sessid')) {
-//                $metadata = $this->getCookieMetadataFactory()->createCookieMetadata();
-//                $metadata->setPath('/');
-//                $this->getCookieManager()->deleteCookie('mage-cache-sessid', $metadata);
-//            }
             $redirectUrl = $this->accountRedirect->getRedirectCookie();
             if (!$this->getScopeConfig()->getValue('customer/startup/redirect_dashboard') && $redirectUrl) {
                 $this->accountRedirect->clearRedirectCookie();
                 $resultRedirect = $this->resultRedirectFactory->create();
-                // URL is checked to be internal in $this->_redirect->success()
                 $resultRedirect->setUrl($this->_redirect->success($redirectUrl));
 
                 return $resultRedirect;
             }
         } catch (\Exception $e) {
-            // PA DSS violation: throwing or logging an exception here can disclose customer password
             $this->messageManager->addError(
                 __('An unspecified error occurred. Please contact us for assistance.')
             );

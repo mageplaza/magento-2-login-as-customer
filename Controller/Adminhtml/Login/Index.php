@@ -107,7 +107,7 @@ class Index extends \Magento\Backend\App\Action
         $store = $this->_loginHelper->getStore($customer);
         $loginUrl = $this->_objectManager->create(Url::class)
             ->setScope($store)
-            ->getUrl('mploginascustomer/login/index', ['key' => $token]);
+            ->getUrl('mploginascustomer/login/index', ['key' => $token, '_nosid' => true]);
 
         $this->getResponse()->setRedirect($loginUrl);
     }
