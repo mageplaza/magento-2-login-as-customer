@@ -179,8 +179,6 @@ class Index extends \Magento\Framework\App\Action\Action
         try {
             $this->session->loginById($customerId);
             $this->session->regenerateId();
-            echo 'brian success 1';
-            return true;
 
             $log->setIsLoggedIn(true)
                 ->save();
