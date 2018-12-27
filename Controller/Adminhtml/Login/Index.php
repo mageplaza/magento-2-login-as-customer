@@ -82,6 +82,12 @@ class Index extends \Magento\Backend\App\Action
      */
     public function execute()
     {
+        if (!$this->_loginHelper->isEnabled()) {
+            $this->messageManager->addErrorMessage(__('Module is not enabled.'));
+
+            return $this->_redirect('customer');
+        }
+
         $customerId = $this->getRequest()->getParam('id');
         $customer = $this->_customerFactory->create()->load($customerId);
         if (!$customer || !$customer->getId()) {

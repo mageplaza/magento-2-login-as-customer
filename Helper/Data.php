@@ -69,11 +69,13 @@ class Data extends AbstractData
     }
 
     /**
+     * @param null $storeId
+     *
      * @return bool
      */
     public function isAllowLogin()
     {
-        return $this->_authorization->isAllowed('Mageplaza_LoginAsCustomer::allow');
+        return $this->isEnabled() && $this->_authorization->isAllowed('Mageplaza_LoginAsCustomer::allow');
     }
 
     /**
