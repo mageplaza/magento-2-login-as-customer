@@ -21,13 +21,11 @@
 
 namespace Mageplaza\LoginAsCustomer\Controller\Login;
 
-use Magento\Customer\Api\AccountManagementInterface;
+use Magento\Checkout\Model\Cart;
 use Magento\Customer\Model\Account\Redirect as AccountRedirect;
 use Magento\Customer\Model\Session;
-use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Data\Form\FormKey\Validator;
+use Mageplaza\LoginAsCustomer\Helper\Data;
 use Mageplaza\LoginAsCustomer\Model\LogFactory;
 
 /**
@@ -36,16 +34,6 @@ use Mageplaza\LoginAsCustomer\Model\LogFactory;
  */
 class Index extends \Magento\Framework\App\Action\Action
 {
-    /**
-     * @var \Magento\Customer\Api\AccountManagementInterface
-     */
-    protected $customerAccountManagement;
-
-    /**
-     * @var \Magento\Framework\Data\Form\FormKey\Validator
-     */
-    protected $formKeyValidator;
-
     /**
      * @var AccountRedirect
      */
@@ -57,118 +45,46 @@ class Index extends \Magento\Framework\App\Action\Action
     protected $session;
 
     /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
-
-    /**
-     * @var \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory
-     */
-    private $cookieMetadataFactory;
-
-    /**
-     * @var \Magento\Framework\Stdlib\Cookie\PhpCookieManager
-     */
-    private $cookieMetadataManager;
-
-    /**
      * @var LogFactory
      */
     protected $_logFactory;
 
     /**
-     * @var CustomerUrl
+     * @var Cart
      */
-    protected $customerUrl;
-
-    protected $checkoutSession;
-
     protected $checkoutCart;
+
+    /**
+     * @var Data
+     */
+    protected $helperData;
 
     /**
      * Index constructor.
      *
      * @param Context $context
      * @param Session $customerSession
-     * @param AccountManagementInterface $customerAccountManagement
-     * @param CustomerUrl $customerHelperData
-     * @param Validator $formKeyValidator
      * @param AccountRedirect $accountRedirect
+     * @param Cart $checkoutCart
+     * @param Data $helper
      * @param LogFactory $logFactory
      */
     public function __construct(
         Context $context,
         Session $customerSession,
-        AccountManagementInterface $customerAccountManagement,
-        CustomerUrl $customerHelperData,
-        Validator $formKeyValidator,
         AccountRedirect $accountRedirect,
-        \Magento\Checkout\Model\Session $checkoutSession,
-        \Magento\Checkout\Model\Cart $checkoutCart,
+        Cart $checkoutCart,
+        Data $helper,
         LogFactory $logFactory
     )
     {
         $this->session = $customerSession;
-        $this->customerAccountManagement = $customerAccountManagement;
-        $this->customerUrl = $customerHelperData;
-        $this->formKeyValidator = $formKeyValidator;
         $this->accountRedirect = $accountRedirect;
-        $this->checkoutSession = $checkoutSession;
         $this->checkoutCart = $checkoutCart;
         $this->_logFactory = $logFactory;
+        $this->helperData = $helper;
 
         parent::__construct($context);
-    }
-
-    /**
-     * Get scope config
-     *
-     * @return ScopeConfigInterface
-     * @deprecated 100.0.10
-     */
-    private function getScopeConfig()
-    {
-        if (!($this->scopeConfig instanceof \Magento\Framework\App\Config\ScopeConfigInterface)) {
-            return \Magento\Framework\App\ObjectManager::getInstance()->get(
-                \Magento\Framework\App\Config\ScopeConfigInterface::class
-            );
-        } else {
-            return $this->scopeConfig;
-        }
-    }
-
-    /**
-     * Retrieve cookie manager
-     *
-     * @deprecated 100.1.0
-     * @return \Magento\Framework\Stdlib\Cookie\PhpCookieManager
-     */
-    private function getCookieManager()
-    {
-        if (!$this->cookieMetadataManager) {
-            $this->cookieMetadataManager = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                \Magento\Framework\Stdlib\Cookie\PhpCookieManager::class
-            );
-        }
-
-        return $this->cookieMetadataManager;
-    }
-
-    /**
-     * Retrieve cookie metadata factory
-     *
-     * @deprecated 100.1.0
-     * @return \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory
-     */
-    private function getCookieMetadataFactory()
-    {
-        if (!$this->cookieMetadataFactory) {
-            $this->cookieMetadataFactory = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory::class
-            );
-        }
-
-        return $this->cookieMetadataFactory;
     }
 
     /**
@@ -179,7 +95,7 @@ class Index extends \Magento\Framework\App\Action\Action
         $token = $this->getRequest()->getParam('key');
 
         $log = $this->_logFactory->create()->load($token, 'token');
-        if (!$log || !$log->getId() || $log->getIsLoggedIn()) {
+        if (!$log || !$log->getId() || $log->getIsLoggedIn() || !$this->helperData->isEnabled()) {
             return $this->_redirect('noRoute');
         }
 
@@ -201,7 +117,7 @@ class Index extends \Magento\Framework\App\Action\Action
                 ->save();
 
             $redirectUrl = $this->accountRedirect->getRedirectCookie();
-            if (!$this->getScopeConfig()->getValue('customer/startup/redirect_dashboard') && $redirectUrl) {
+            if (!$this->helperData->getConfigValue('customer/startup/redirect_dashboard') && $redirectUrl) {
                 $this->accountRedirect->clearRedirectCookie();
                 $resultRedirect = $this->resultRedirectFactory->create();
                 $resultRedirect->setUrl($this->_redirect->success($redirectUrl));
