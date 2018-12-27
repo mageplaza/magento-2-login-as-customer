@@ -46,21 +46,16 @@ class AddButton
 
     /**
      * @param \Magento\Sales\Block\Adminhtml\Order\View $subject
-     * @param $layout
-     *
-     * @return array
      */
-    public function beforeSetLayout(\Magento\Sales\Block\Adminhtml\Order\View $subject, $layout)
+    public function beforeGetBackUrl(\Magento\Sales\Block\Adminhtml\Order\View $subject)
     {
         $customerId = $subject->getOrder()->getCustomerId();
-        if ($customerId && $this->helper->isAllowLogin()){
+        if ($customerId && $this->helper->isAllowLogin()) {
             $subject->addButton('login_as_customer', [
-                'label' => __('Login as Customer'),
-                'class' => 'login-as-customer',
+                'label'    => __('Login as Customer'),
+                'class'    => 'login-as-customer',
                 'on_click' => sprintf("window.open('%s');", $subject->getUrl('mploginascustomer/login/index', ['id' => $customerId]))
-            ]);
+            ], 60);
         }
-
-        return [$layout];
     }
 }
