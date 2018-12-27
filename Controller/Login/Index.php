@@ -190,7 +190,7 @@ class Index extends \Magento\Framework\App\Action\Action
                 $this->checkoutCart->truncate()->save();
             }
         } catch (\Exception $e) {
-            $this->messageManager->addNoticeMessage(__('Cannot truncate cart item.'));
+            $this->messageManager->addNoticeMessage(__('Cannot truncate cart items.'));
         }
 
         try {

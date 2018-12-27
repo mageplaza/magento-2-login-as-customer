@@ -1,12 +1,10 @@
 "Login as Customer","Login as Customer"
 "Login as Customer Logs","Login as Customer Logs"
 "Customer does not exist.","Customer does not exist."
-"Cannot truncate cart item.","Cannot truncate cart item."
+"Cannot truncate cart items.","Cannot truncate cart items."
 "An unspecified error occurred. Please contact us for assistance.","An unspecified error occurred. Please contact us for assistance."
-"Admin Login Logs","Admin Login Logs"
-"Allow Admin Login","Allow Admin Login"
-"Mageplaza Login As Customer","Mageplaza Login As Customer"
-"Login As Customer","Login As Customer"
+"Allow Login as Customer","Allow Login as Customer"
+"Mageplaza Login as Customer","Mageplaza Login as Customer"
 General,General
 Enable,Enable
 "Select Yes to enable this module","Select Yes to enable this module"
