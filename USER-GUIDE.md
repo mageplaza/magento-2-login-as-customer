@@ -4,7 +4,7 @@
 - User Guide: https://docs.mageplaza.com/login-as-customer/
 - Product page: https://www.mageplaza.com/magento-2-login-as-customer/
 - FAQs: https://www.mageplaza.com/faqs/
-- Get Support: https://mageplaza.freshdesk.com/ or support@mageplaza.com
+- Get Support: https://www.mageplaza.com/contact.html or support@mageplaza.com
 - Changelog: https://www.mageplaza.com/releases/login-as-customer/
 - License agreement: https://www.mageplaza.com/LICENSE.txt
 

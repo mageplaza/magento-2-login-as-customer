@@ -51,6 +51,7 @@
         </argument>
     </dataSource>
     <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
         <exportButton name="export_button"/>
         <paging name="listing_paging"/>
     </listingToolbar>

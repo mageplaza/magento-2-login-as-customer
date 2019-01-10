@@ -69,8 +69,6 @@ class Data extends AbstractData
     }
 
     /**
-     * @param null $storeId
-     *
      * @return bool
      */
     public function isAllowLogin()
