@@ -49,8 +49,7 @@ class Button extends GenericButton implements ButtonProviderInterface
         Context $context,
         Registry $registry,
         Data $helper
-    )
-    {
+    ) {
         $this->_helper = $helper;
 
         parent::__construct($context, $registry);
@@ -65,9 +64,9 @@ class Button extends GenericButton implements ButtonProviderInterface
         $data = [];
         if ($customerId && $this->_helper->isAllowLogin()) {
             $data = [
-                'label' => __('Login as Customer'),
-                'class' => 'login-as-customer',
-                'on_click' => sprintf("window.open('%s');", $this->getLoginUrl()),
+                'label'      => __('Login as Customer'),
+                'class'      => 'login-as-customer',
+                'on_click'   => sprintf("window.open('%s');", $this->getLoginUrl()),
                 'sort_order' => 60,
             ];
         }

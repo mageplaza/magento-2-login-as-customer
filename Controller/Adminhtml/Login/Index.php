@@ -21,6 +21,7 @@
 
 namespace Mageplaza\LoginAsCustomer\Controller\Adminhtml\Login;
 
+use Magento\Backend\App\Action\Context;
 use Magento\Customer\Model\CustomerFactory;
 use Magento\Framework\Url;
 use Mageplaza\LoginAsCustomer\Helper\Data;
@@ -57,18 +58,17 @@ class Index extends \Magento\Backend\App\Action
     /**
      * Index constructor.
      *
-     * @param \Magento\Backend\App\Action\Context $context
+     * @param Context $context
      * @param CustomerFactory $customerFactory
      * @param LogFactory $logFactory
      * @param Data $helper
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
+        Context $context,
         CustomerFactory $customerFactory,
         LogFactory $logFactory,
         Data $helper
-    )
-    {
+    ) {
         $this->_customerFactory = $customerFactory;
         $this->_logFactory = $logFactory;
         $this->_loginHelper = $helper;
@@ -101,13 +101,13 @@ class Index extends \Magento\Backend\App\Action
 
         $log = $this->_logFactory->create();
         $log->setData([
-            'token' => $token,
-            'admin_id' => $user->getId(),
-            'admin_email' => $user->getEmail(),
-            'admin_name' => $user->getName(),
-            'customer_id' => $customer->getId(),
+            'token'          => $token,
+            'admin_id'       => $user->getId(),
+            'admin_email'    => $user->getEmail(),
+            'admin_name'     => $user->getName(),
+            'customer_id'    => $customer->getId(),
             'customer_email' => $customer->getEmail(),
-            'customer_name' => $customer->getName()
+            'customer_name'  => $customer->getName()
         ])->save();
 
         $store = $this->_loginHelper->getStore($customer);

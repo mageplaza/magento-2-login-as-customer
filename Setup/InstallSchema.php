@@ -50,7 +50,7 @@ class InstallSchema implements InstallSchemaInterface
                 'identity' => true,
                 'unsigned' => true,
                 'nullable' => false,
-                'primary' => true
+                'primary'  => true
             ], 'Entity ID')
             ->addColumn('admin_id', \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER, null, ['unsigned' => true, 'nullable' => false, 'default' => '0'], 'Admin ID')
             ->addColumn('admin_email', \Magento\Framework\DB\Ddl\Table::TYPE_TEXT, 255, [], 'Admin Email')
