@@ -52,8 +52,7 @@ class Admin extends Column
         UserFactory $userFactory,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->userFactory = $userFactory;
 
         parent::__construct($context, $uiComponentFactory, $components, $data);

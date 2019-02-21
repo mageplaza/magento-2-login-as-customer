@@ -52,8 +52,7 @@ class Customer extends Column
         CustomerRepository $customerRepository,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->customerRepository = $customerRepository;
 
         parent::__construct($context, $uiComponentFactory, $components, $data);

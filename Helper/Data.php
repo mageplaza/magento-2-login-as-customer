@@ -60,8 +60,7 @@ class Data extends AbstractData
         StoreManagerInterface $storeManager,
         \Magento\Framework\AuthorizationInterface $authorization,
         \Magento\Framework\Math\Random $random
-    )
-    {
+    ) {
         $this->_authorization = $authorization;
         $this->mathRandom = $random;
 
@@ -78,6 +77,7 @@ class Data extends AbstractData
 
     /**
      * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getLoginToken()
     {

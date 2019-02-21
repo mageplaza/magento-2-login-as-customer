@@ -76,8 +76,7 @@ class Index extends \Magento\Framework\App\Action\Action
         Cart $checkoutCart,
         Data $helper,
         LogFactory $logFactory
-    )
-    {
+    ) {
         $this->session = $customerSession;
         $this->accountRedirect = $accountRedirect;
         $this->checkoutCart = $checkoutCart;
