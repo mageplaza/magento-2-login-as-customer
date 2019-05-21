@@ -1,7 +1,7 @@
 
-# Magento 2 Login As Customer 
+# Magento 2 Login As Customer extension FREE
 
-[Login as Customer by Mageplaza](https://www.mageplaza.com/magento-2-login-as-customer/) supports the store admin to login to customers' account and automatically save that login data. In many cases, customers face some difficulty or inconvenience in My Account page, or right in the checkout step. Login as Customer module will be a great solution for such these circumstances. The store can have a quick view after access as a customer, as a result, this can save a significant amount of time for both administrator and customers.
+[Magento 2 Login as Customer by Mageplaza](https://www.mageplaza.com/magento-2-login-as-customer/) supports the store admin to login to customers' account and automatically save that login data. In many cases, customers face some difficulty or inconvenience in My Account page, or right in the checkout step. Login as Customer module will be a great solution for such these circumstances. The store can have a quick view after access as a customer, as a result, this can save a significant amount of time for both administrator and customers.
 
 
 
@@ -14,7 +14,7 @@
 - Get Support: https://github.com/mageplaza/magento-2-login-as-customer/issues
 
 
-## 2. FAQs
+## 2. Login as Customer FAQs
 
 **Q: I got error: Mageplaza_Core has been already defined**
 
@@ -33,7 +33,7 @@ A: The extension allows store owners to view access history. On the backend, ple
 A:  Yes, it is totally possible. From the report logs, you can hit the Export button and select the exported CSV or XML file. 
 
 
-## 3. How to install Login as Customer extension for Magento 2
+## 3. How to install Magento 2 Login as Customer extension
 - Install via composer (recommend)
 - Run the following command in Magento 2 root folder:
 
@@ -43,32 +43,32 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
 
-## 4. Highlight features
+## 4. Login as Customer highlight features
 
 
 ### Instantly access to any customer account 
 
-One of the most noticeable features of Login as Customer extension is that the store admin can log in a customer’s account to take some necessary actions.
+One of the most noticeable features of **M2 Login as Customer extension** is that the store admin can log in a customer’s account to take some necessary actions.
 
-![Imgur](https://i.imgur.com/wjxAovr.png)
+![Magento 2  Instantly access to any customer account ](https://i.imgur.com/wjxAovr.png)
 
 #### Easy access from convenient places 
 
-On the Magento 2 backend, the admin can quickly access the account of any customer by selecting between Order View and Customer View options. Right here, there are two important places, in which all information of customers and orders is continuously updated. Hence, Login as Customer link is placed here, to support admins in accessing quickly and conveniently, without any difficulty. 
+On the Magento 2 backend, the admin can quickly access the account of any customer by selecting between **Order View** and **Customer View** options. Right here, there are two important places, in which all information of customers and orders is continuously updated. Hence, **Login as Customer** link is placed here, to support admins in accessing quickly and conveniently, without any difficulty. 
 
 #### Only one click to access all information needed
 
-On the pages mentioned, with only one click on the Login as Customer button, the admin will be redirected instantly to customers’ account with full actual information such as my dashboard, order information, account information, etc. With this module, it is not only easy to access but is also possible to edit or make any updates in the blink of an eye.
+On the pages mentioned, with only one click on the **Login as Customer** button, the admin will be redirected instantly to customers’ account with full actual information such as my dashboard, order information, account information, etc. With **Magento 2 Login as Customer module**, it is not only easy to access but is also possible to edit or make any updates in the blink of an eye.
 
 
 
 ### Record login history
 
-![Imgur](https://i.imgur.com/Uvg5qTA.png)
+![Magento 2 Login as Customer module](https://i.imgur.com/Uvg5qTA.png)
 
 #### Continually record every login attempt
 
-Any access to customers' account can be recorded exactly in Login as Customer Logs section on the backend. There is a report here, which provides all access information, including date and time, customer account, admin account.
+Any access to customers' account can be recorded exactly in **Login as Customer Logs section on the backend**. There is a report here, which provides all access information, including date and time, customer account, admin account.
  
 #### Manage and track customer/order information easily 
 
@@ -78,14 +78,14 @@ In case a store has multiple admin accounts, the access report mentioned above i
 
 ### Export login logs function
 
-Login as Customer module by Mageplaza also support the export function. On the report log, the administrator can easily export login data so that they can save those data on the daily or monthly basis with ease. By this way, it is easy to store the login records, then use for login information management or any other specific purposes. 
+**Mageplaza Login as Customer module for Magento 2** also support the export function. On the report log, the administrator can easily export login data so that they can save those data on the daily or monthly basis with ease. By this way, it is easy to store the login records, then use for login information management or any other specific purposes. 
 
 The most common-used exported file formats are CSV and Excel XML.  
 
-![Imgur](https://i.imgur.com/nlgTMbm.png)
+![Mageplaza Login as Customer module for Magento 2](https://i.imgur.com/nlgTMbm.png)
 
 
-## 5. Full Feature List
+## 5. Full Magento 2 Login as Customer Features
 
 ### For admins
 - Enable/disable the extension 
@@ -100,13 +100,13 @@ The most common-used exported file formats are CSV and Excel XML.
 
 
 
-## 6. How to configure Login as customer
+## 6. How to configure Login as Customer
 
 ### 6.1.Configuration
 
 From **Admin panel**, go to `Stores > Configuration > Mageplaza > Login as Customer` 
 
-![Imgur](https://i.imgur.com/s7jE6Zr.png)
+![How to configure Login as Customer extension](https://i.imgur.com/s7jE6Zr.png)
 
 - Select **Enable = Yes**:
   - Activate the module. Then, admin can log in customer’s account from the admin backend. 
@@ -114,11 +114,11 @@ From **Admin panel**, go to `Stores > Configuration > Mageplaza > Login as Custo
   
 - **Customer Edit**
   
-![Imgur](https://i.imgur.com/YQni7Dz.png)
+![How to configure Magento 2 Login as Customer](https://i.imgur.com/YQni7Dz.png)
 
 - **Order View**
 
-![Imgur](https://i.imgur.com/pdS3kop.png)
+![How to configure Login as Customer module](https://i.imgur.com/pdS3kop.png)
 
 
 
@@ -130,4 +130,24 @@ From **Admin panel**, select `Report > Customer > Login as Customer Logs`
 - Not allowed to delete or edit any information on this log history
 - Admin can export any log to CSV or XML files
 
-![Imgur](https://i.imgur.com/CoeCxzo.png)
+![Magento 2 Login as Customer Logs](https://i.imgur.com/CoeCxzo.png)
+
+**People also search:**
+- magento 2 login as customer
+- login as customer magento 2
+- magento 2 login as customer extension
+- mageplaza login as customer
+- mageplaza login as customer magento 2
+- magento 2 login to your customer account
+- login as customer magento 2
+
+
+**Other free extension on Github**
+- [Magento 2 SEO](https://github.com/mageplaza/magento-2-seo)
+- [magento 2 Google Maps](https://github.com/mageplaza/magento-2-google-maps)
+- [Magento 2 Delete Orders](https://github.com/mageplaza/magento-2-delete-orders)
+- [Magento 2 GDPR Free](https://github.com/mageplaza/magento-2-gdpr)
+- [Magento 2 blog](https://github.com/mageplaza/magento-2-blog)
+- [Magento 2 Same Order Number](https://github.com/mageplaza/magento-2-same-order-number)
+- [Magento 2 Layered Navigation](https://github.com/mageplaza/magento-2-ajax-layered-navigation)
+- [Magento 2 security](https://github.com/mageplaza/magento-2-security)
