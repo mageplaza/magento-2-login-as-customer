@@ -21,8 +21,13 @@
 
 namespace Mageplaza\LoginAsCustomer\Controller\Adminhtml\Login;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Customer\Model\CustomerFactory;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Url;
 use Mageplaza\LoginAsCustomer\Helper\Data;
 use Mageplaza\LoginAsCustomer\Model\LogFactory;
@@ -31,7 +36,7 @@ use Mageplaza\LoginAsCustomer\Model\LogFactory;
  * Class Index
  * @package Mageplaza\LoginAsCustomer\Controller\Adminhtml\Login
  */
-class Index extends \Magento\Backend\App\Action
+class Index extends Action
 {
     /**
      * Authorization level of a basic admin session
@@ -77,8 +82,9 @@ class Index extends \Magento\Backend\App\Action
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return ResponseInterface|ResultInterface
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
     public function execute()
     {
@@ -115,6 +121,6 @@ class Index extends \Magento\Backend\App\Action
             ->setScope($store)
             ->getUrl('mploginascustomer/login/index', ['key' => $token, '_nosid' => true]);
 
-        $this->getResponse()->setRedirect($loginUrl);
+        return $this->getResponse()->setRedirect($loginUrl);
     }
 }

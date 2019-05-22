@@ -22,6 +22,8 @@
 namespace Mageplaza\LoginAsCustomer\Ui\Component\Listing\Columns;
 
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
@@ -62,8 +64,8 @@ class Customer extends Column
      * @param array $dataSource
      *
      * @return array
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
     public function prepareDataSource(array $dataSource)
     {

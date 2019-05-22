@@ -21,10 +21,16 @@
 
 namespace Mageplaza\LoginAsCustomer\Controller\Login;
 
+use Exception;
 use Magento\Checkout\Model\Cart;
 use Magento\Customer\Model\Account\Redirect as AccountRedirect;
 use Magento\Customer\Model\Session;
+use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Forward;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
 use Mageplaza\LoginAsCustomer\Helper\Data;
 use Mageplaza\LoginAsCustomer\Model\LogFactory;
 
@@ -32,7 +38,7 @@ use Mageplaza\LoginAsCustomer\Model\LogFactory;
  * Class Index
  * @package Mageplaza\LoginAsCustomer\Controller\Login
  */
-class Index extends \Magento\Framework\App\Action\Action
+class Index extends Action
 {
     /**
      * @var AccountRedirect
@@ -87,7 +93,7 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Forward|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     * @return ResponseInterface|Forward|Redirect|ResultInterface
      */
     public function execute()
     {
@@ -104,7 +110,7 @@ class Index extends \Magento\Framework\App\Action\Action
             } else {
                 $this->checkoutCart->truncate()->save();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->messageManager->addNoticeMessage(__('Cannot truncate cart items.'));
         }
 
@@ -123,7 +129,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
                 return $resultRedirect;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->messageManager->addError(
                 __('An unspecified error occurred. Please contact us for assistance.')
             );
