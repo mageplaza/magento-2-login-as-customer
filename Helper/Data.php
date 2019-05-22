@@ -23,7 +23,12 @@ namespace Mageplaza\LoginAsCustomer\Helper;
 
 use Magento\Customer\Model\Customer;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\AuthorizationInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Math\Random;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 
@@ -36,12 +41,12 @@ class Data extends AbstractData
     const CONFIG_MODULE_PATH = 'mploginascustomer';
 
     /**
-     * @var \Magento\Framework\AuthorizationInterface
+     * @var AuthorizationInterface
      */
     protected $_authorization;
 
     /**
-     * @var \Magento\Framework\Math\Random
+     * @var Random
      */
     protected $mathRandom;
 
@@ -51,15 +56,15 @@ class Data extends AbstractData
      * @param Context $context
      * @param ObjectManagerInterface $objectManager
      * @param StoreManagerInterface $storeManager
-     * @param \Magento\Framework\AuthorizationInterface $authorization
-     * @param \Magento\Framework\Math\Random $random
+     * @param AuthorizationInterface $authorization
+     * @param Random $random
      */
     public function __construct(
         Context $context,
         ObjectManagerInterface $objectManager,
         StoreManagerInterface $storeManager,
-        \Magento\Framework\AuthorizationInterface $authorization,
-        \Magento\Framework\Math\Random $random
+        AuthorizationInterface $authorization,
+        Random $random
     ) {
         $this->_authorization = $authorization;
         $this->mathRandom = $random;
@@ -77,7 +82,7 @@ class Data extends AbstractData
 
     /**
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function getLoginToken()
     {
@@ -87,8 +92,8 @@ class Data extends AbstractData
     /**
      * @param Customer $customer
      *
-     * @return \Magento\Store\Api\Data\StoreInterface|null
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return StoreInterface|null
+     * @throws NoSuchEntityException
      */
     public function getStore($customer)
     {

@@ -21,11 +21,14 @@
 
 namespace Mageplaza\LoginAsCustomer\Model\ResourceModel\Log;
 
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Mageplaza\LoginAsCustomer\Model\ResourceModel\Log;
+
 /**
  * Class Collection
  * @package Mageplaza\LoginAsCustomer\Model\ResourceModel\Log
  */
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+class Collection extends AbstractCollection
 {
     /**
      * @var string
@@ -53,6 +56,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init(\Mageplaza\LoginAsCustomer\Model\Log::class, \Mageplaza\LoginAsCustomer\Model\ResourceModel\Log::class);
+        $this->_init(\Mageplaza\LoginAsCustomer\Model\Log::class, Log::class);
     }
 }

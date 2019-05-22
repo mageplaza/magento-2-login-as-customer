@@ -50,7 +50,7 @@ class Log extends AbstractModel implements IdentityInterface
      */
     protected function _construct()
     {
-        $this->_init(\Mageplaza\LoginAsCustomer\Model\ResourceModel\Log::class);
+        $this->_init(ResourceModel\Log::class);
     }
 
     /**

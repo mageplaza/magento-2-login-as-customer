@@ -21,6 +21,7 @@
 
 namespace Mageplaza\LoginAsCustomer\Plugin;
 
+use Magento\Sales\Block\Adminhtml\Order\View;
 use Mageplaza\LoginAsCustomer\Helper\Data;
 
 /**
@@ -45,9 +46,9 @@ class AddButton
     }
 
     /**
-     * @param \Magento\Sales\Block\Adminhtml\Order\View $subject
+     * @param View $subject
      */
-    public function beforeGetBackUrl(\Magento\Sales\Block\Adminhtml\Order\View $subject)
+    public function beforeGetBackUrl(View $subject)
     {
         $customerId = $subject->getOrder()->getCustomerId();
         if ($customerId && $this->helper->isAllowLogin()) {
