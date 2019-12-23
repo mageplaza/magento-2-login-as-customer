@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_LoginAsCustomer
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mp_login_as_customer" resource="default" engine="innodb" comment="Login As Customer Logs table">
+        <column xsi:type="int" name="log_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="admin_id" padding="10" unsigned="true" nullable="false" default="0" comment="Admin ID"/>
+        <column xsi:type="varchar" name="admin_email" length="255" comment="Admin Email"/>
+        <column xsi:type="varchar" name="admin_name" length="255" comment="Admin Name"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" default="0" comment="Customer ID"/>
+        <column xsi:type="varchar" name="customer_email" length="255" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_name" length="255" comment="Customer Name"/>
+        <column xsi:type="varchar" name="token" length="64" comment="Token"/>
+        <column xsi:type="smallint" name="is_logged_in" nullable="false" default="0" comment="Is Logged In"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="MPLOGINASCUSTOMER_LOG_ID" indexType="btree">
+            <column name="log_id"/>
+        </index>
+        <index referenceId="MPLOGINASCUSTOMER_ADMIN_ID" indexType="btree">
+            <column name="admin_id"/>
+        </index>
+        <index referenceId="MPLOGINASCUSTOMER_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+</schema>
