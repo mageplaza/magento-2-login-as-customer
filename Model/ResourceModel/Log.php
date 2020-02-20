@@ -24,8 +24,7 @@ namespace Mageplaza\LoginAsCustomer\Model\ResourceModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
- * Class Log
- * @package Mageplaza\LoginAsCustomer\Model\ResourceModel
+ * Login as customer log resourcemodel class
  */
 class Log extends AbstractDb
 {

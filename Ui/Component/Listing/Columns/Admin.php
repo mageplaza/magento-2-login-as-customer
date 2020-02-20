@@ -27,8 +27,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\User\Model\UserFactory;
 
 /**
- * Class Admin
- * @package Mageplaza\LoginAsCustomer\Ui\Component\Listing\Columns
+ * Login as customer admin listing ui component class
  */
 class Admin extends Column
 {
@@ -73,9 +72,17 @@ class Admin extends Column
 
                 $admin = $this->userFactory->create()->load($adminId);
                 if ($admin && $admin->getId()) {
-                    $item['admin_id'] = $admin->getName() . ' <' . $admin->getEmail() . '>';
+                    $item['admin_id'] = __(
+                        "%1 <%2>",
+                        $admin->getName(),
+                        $admin->getEmail()
+                    );
                 } else {
-                    $item['admin_id'] = $item['admin_name'] . ' <' . $item['admin_email'] . '>';
+                    $item['admin_id'] = __(
+                        "%1 <%2>",
+                        $item['admin_name'],
+                        $item['admin_email']
+                    );
                 }
             }
         }

@@ -66,39 +66,100 @@ class InstallSchema implements InstallSchemaInterface
         /**
          * Create table 'mp_login_as_customer'
          */
-        $table = $setup->getConnection()
-            ->newTable($setup->getTable('mp_login_as_customer'))
-            ->addColumn('log_id', Table::TYPE_INTEGER, null, [
-                'identity' => true,
-                'unsigned' => true,
-                'nullable' => false,
-                'primary'  => true
-            ], 'Entity ID')
-            ->addColumn('admin_id', Table::TYPE_INTEGER, null, [
-                'unsigned' => true,
-                'nullable' => false,
-                'default'  => '0'
-            ], 'Admin ID')
-            ->addColumn('admin_email', Table::TYPE_TEXT, 255, [], 'Admin Email')
-            ->addColumn('admin_name', Table::TYPE_TEXT, 255, [], 'Admin Name')
-            ->addColumn('customer_id', Table::TYPE_INTEGER, null, [
-                'unsigned' => true,
-                'nullable' => false,
-                'default'  => '0'
-            ], 'Customer ID')
-            ->addColumn('customer_email', Table::TYPE_TEXT, 255, [], 'Customer Email')
-            ->addColumn('customer_name', Table::TYPE_TEXT, 255, [], 'Customer Name')
-            ->addColumn('token', Table::TYPE_TEXT, 64, [], 'Token')
-            ->addColumn('is_logged_in', Table::TYPE_SMALLINT, null, [
-                'nullable' => false,
-                'default'  => '0'
-            ], 'Is Logged In')
-            ->addColumn('created_at', Table::TYPE_TIMESTAMP, null, [
-                'nullable' => false,
-                'default'  => Table::TIMESTAMP_INIT
-            ], 'Creation Time')
+        $table = $installer->getConnection()
+            ->newTable($installer->getTable('mp_login_as_customer'))
+            ->addColumn(
+                'log_id',
+                Table::TYPE_INTEGER,
+                null,
+                [
+                    'identity' => true,
+                    'unsigned' => true,
+                    'nullable' => false,
+                    'primary'  => true
+                ],
+                'Entity ID'
+            )
+            ->addColumn(
+                'admin_id',
+                Table::TYPE_INTEGER,
+                null,
+                [
+                    'unsigned' => true,
+                    'nullable' => false,
+                    'default' => '0'
+                ],
+                'Admin ID'
+            )
+            ->addColumn(
+                'admin_email',
+                Table::TYPE_TEXT,
+                255,
+                [],
+                'Admin Email'
+            )
+            ->addColumn(
+                'admin_name',
+                Table::TYPE_TEXT,
+                255,
+                [],
+                'Admin Name'
+            )
+            ->addColumn(
+                'customer_id',
+                Table::TYPE_INTEGER,
+                null,
+                [
+                    'unsigned' => true,
+                    'nullable' => false,
+                    'default' => '0'
+                ],
+                'Customer ID'
+            )
+            ->addColumn(
+                'customer_email',
+                Table::TYPE_TEXT,
+                255,
+                [],
+                'Customer Email'
+            )
+            ->addColumn(
+                'customer_name',
+                Table::TYPE_TEXT,
+                255,
+                [],
+                'Customer Name'
+            )
+            ->addColumn(
+                'token',
+                Table::TYPE_TEXT,
+                64,
+                [],
+                'Token'
+            )
+            ->addColumn(
+                'is_logged_in',
+                Table::TYPE_SMALLINT,
+                null,
+                [
+                    'nullable' => false,
+                    'default' => '0'
+                ],
+                'Is Logged In'
+            )
+            ->addColumn(
+                'created_at',
+                Table::TYPE_TIMESTAMP,
+                null,
+                [
+                    'nullable' => false,
+                    'default' => Table::TIMESTAMP_INIT
+                ],
+                'Creation Time'
+            )
             ->setComment('Login As Customer Logs table');
-        $setup->getConnection()->createTable($table);
+
+        $installer->getConnection()->createTable($table);
 
         $setup->endSetup();
     }

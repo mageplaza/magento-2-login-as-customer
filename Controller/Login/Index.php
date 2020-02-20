@@ -35,8 +35,7 @@ use Mageplaza\LoginAsCustomer\Helper\Data;
 use Mageplaza\LoginAsCustomer\Model\LogFactory;
 
 /**
- * Class Index
- * @package Mageplaza\LoginAsCustomer\Controller\Login
+ * Login as customer controller class login
  */
 class Index extends Action
 {

@@ -29,8 +29,7 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
 /**
- * Class Customer
- * @package Mageplaza\LoginAsCustomer\Ui\Component\Listing\Columns
+ * Login as customer customer listing ui component class
  */
 class Customer extends Column
 {
@@ -75,9 +74,18 @@ class Customer extends Column
 
                 $customer = $this->customerRepository->getById($customerId);
                 if ($customer && $customer->getId()) {
-                    $item['customer_id'] = $customer->getFirstname() . ' ' . $customer->getLastname() . ' <' . $customer->getEmail() . '>';
+                    $item['customer_id'] = __(
+                        "%1 %2 <%3>",
+                        $customer->getFirstname(),
+                        $customer->getLastname(),
+                        $customer->getEmail()
+                    );
                 } else {
-                    $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
+                    $item['customer_id'] = __(
+                        "%1 <%2>",
+                        $item['customer_name'],
+                        $item['customer_email']
+                    );
                 }
             }
         }

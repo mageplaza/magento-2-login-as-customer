@@ -25,14 +25,10 @@ use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
 /**
- * Class Log
- * @package Mageplaza\LoginAsCustomer\Model
+ * Login as customer log model class
  */
 class Log extends AbstractModel implements IdentityInterface
 {
-    /**
-     * Cache tag
-     */
     const CACHE_TAG = 'loc_log';
 
     /**#@-*/
@@ -60,6 +56,9 @@ class Log extends AbstractModel implements IdentityInterface
      */
     public function getIdentities()
     {
-        return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG . '_' . $this->getIdentifier()];
+        return [
+            self::CACHE_TAG . '_' . $this->getId(),
+            self::CACHE_TAG . '_' . $this->getIdentifier()
+        ];
     }
 }

@@ -27,8 +27,7 @@ use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Class Index
- * @package Mageplaza\LoginAsCustomer\Controller\Adminhtml\Log
+ * Login as customer admin log controller index class
  */
 class Index extends Action
 {

@@ -25,8 +25,7 @@ use Magento\Sales\Block\Adminhtml\Order\View;
 use Mageplaza\LoginAsCustomer\Helper\Data;
 
 /**
- * Class AddButton
- * @package Mageplaza\LoginAsCustomer\Plugin
+ * Login as customer add button plugin class
  */
 class AddButton
 {
@@ -55,7 +54,13 @@ class AddButton
             $subject->addButton('login_as_customer', [
                 'label'    => __('Login as Customer'),
                 'class'    => 'login-as-customer',
-                'on_click' => sprintf("window.open('%s');", $subject->getUrl('mploginascustomer/login/index', ['id' => $customerId]))
+                'on_click' => sprintf(
+                    "window.open('%s');",
+                    $subject->getUrl(
+                        'mploginascustomer/login/index',
+                        ['id' => $customerId]
+                    )
+                )
             ], 60);
         }
     }

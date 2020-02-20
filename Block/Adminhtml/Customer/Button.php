@@ -28,8 +28,7 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 use Mageplaza\LoginAsCustomer\Helper\Data;
 
 /**
- * Class Button
- * @package Mageplaza\LoginAsCustomer\Block\Adminhtml\Customer
+ * Login as customer button class
  */
 class Button extends GenericButton implements ButtonProviderInterface
 {

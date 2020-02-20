@@ -33,8 +33,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 
 /**
- * Class Data
- * @package Mageplaza\LoginAsCustomer\Helper
+ * LoginAsCustomer helper class
  */
 class Data extends AbstractData
 {

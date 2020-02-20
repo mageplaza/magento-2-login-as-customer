@@ -25,8 +25,7 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Mageplaza\LoginAsCustomer\Model\ResourceModel\Log;
 
 /**
- * Class Collection
- * @package Mageplaza\LoginAsCustomer\Model\ResourceModel\Log
+ * Login as customer log resourcemodel collection class
  */
 class Collection extends AbstractCollection
 {
