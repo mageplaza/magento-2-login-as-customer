@@ -24,7 +24,7 @@ namespace Mageplaza\LoginAsCustomer\Controller\Login;
 use Exception;
 use Magento\Checkout\Model\Cart;
 use Magento\Customer\Model\Account\Redirect as AccountRedirect;
-use Magento\Customer\Model\Session;
+use Magento\Customer\Model\SessionFactory;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
@@ -46,7 +46,7 @@ class Index extends Action
     protected $accountRedirect;
 
     /**
-     * @var Session
+     * @var SessionFactory
      */
     protected $session;
 
@@ -69,7 +69,7 @@ class Index extends Action
      * Index constructor.
      *
      * @param Context $context
-     * @param Session $customerSession
+     * @param SessionFactory $customerSession
      * @param AccountRedirect $accountRedirect
      * @param Cart $checkoutCart
      * @param Data $helper
@@ -77,7 +77,7 @@ class Index extends Action
      */
     public function __construct(
         Context $context,
-        Session $customerSession,
+        SessionFactory $customerSession,
         AccountRedirect $accountRedirect,
         Cart $checkoutCart,
         Data $helper,
@@ -98,6 +98,7 @@ class Index extends Action
     public function execute()
     {
         $token = $this->getRequest()->getParam('key');
+        $session = $this->session->create();
 
         $log = $this->_logFactory->create()->load($token, 'token');
         if (!$log || !$log->getId() || $log->getIsLoggedIn() || !$this->helperData->isEnabled()) {
@@ -105,8 +106,8 @@ class Index extends Action
         }
 
         try {
-            if ($this->session->isLoggedIn()) {
-                $this->session->logout();
+            if ($session->isLoggedIn()) {
+                $session->logout();
             } else {
                 $this->checkoutCart->truncate()->save();
             }
@@ -115,8 +116,8 @@ class Index extends Action
         }
 
         try {
-            $this->session->loginById($log->getCustomerId());
-            $this->session->regenerateId();
+            $session->loginById($log->getCustomerId());
+            $session->regenerateId();
 
             $log->setIsLoggedIn(true)
                 ->save();
