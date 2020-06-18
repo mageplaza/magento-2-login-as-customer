@@ -75,8 +75,8 @@ class Index extends Action
         Data $helper
     ) {
         $this->_customerFactory = $customerFactory;
-        $this->_logFactory = $logFactory;
-        $this->_loginHelper = $helper;
+        $this->_logFactory      = $logFactory;
+        $this->_loginHelper     = $helper;
 
         parent::__construct($context);
     }
@@ -95,14 +95,14 @@ class Index extends Action
         }
 
         $customerId = $this->getRequest()->getParam('id');
-        $customer = $this->_customerFactory->create()->load($customerId);
+        $customer   = $this->_customerFactory->create()->load($customerId);
         if (!$customer || !$customer->getId()) {
             $this->messageManager->addErrorMessage(__('Customer does not exist.'));
 
             return $this->_redirect('customer');
         }
 
-        $user = $this->_auth->getUser();
+        $user  = $this->_auth->getUser();
         $token = $this->_loginHelper->getLoginToken();
 
         $log = $this->_logFactory->create();
@@ -116,7 +116,7 @@ class Index extends Action
             'customer_name'  => $customer->getName()
         ])->save();
 
-        $store = $this->_loginHelper->getStore($customer);
+        $store    = $this->_loginHelper->getStore($customer);
         $loginUrl = $this->_objectManager->create(Url::class)
             ->setScope($store)
             ->getUrl('mploginascustomer/login/index', ['key' => $token, '_nosid' => true]);

@@ -83,11 +83,11 @@ class Index extends Action
         Data $helper,
         LogFactory $logFactory
     ) {
-        $this->session = $customerSession;
+        $this->session         = $customerSession;
         $this->accountRedirect = $accountRedirect;
-        $this->checkoutCart = $checkoutCart;
-        $this->_logFactory = $logFactory;
-        $this->helperData = $helper;
+        $this->checkoutCart    = $checkoutCart;
+        $this->_logFactory     = $logFactory;
+        $this->helperData      = $helper;
 
         parent::__construct($context);
     }
@@ -97,7 +97,7 @@ class Index extends Action
      */
     public function execute()
     {
-        $token = $this->getRequest()->getParam('key');
+        $token   = $this->getRequest()->getParam('key');
         $session = $this->session->create();
 
         $log = $this->_logFactory->create()->load($token, 'token');

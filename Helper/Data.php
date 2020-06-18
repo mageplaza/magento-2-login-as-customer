@@ -67,7 +67,7 @@ class Data extends AbstractData
         Random $random
     ) {
         $this->_authorization = $authorization;
-        $this->mathRandom = $random;
+        $this->mathRandom     = $random;
 
         parent::__construct($context, $objectManager, $storeManager);
     }

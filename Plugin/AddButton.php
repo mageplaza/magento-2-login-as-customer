@@ -55,7 +55,10 @@ class AddButton
             $subject->addButton('login_as_customer', [
                 'label'    => __('Login as Customer'),
                 'class'    => 'login-as-customer',
-                'on_click' => sprintf("window.open('%s');", $subject->getUrl('mploginascustomer/login/index', ['id' => $customerId]))
+                'on_click' => sprintf(
+                    "window.open('%s');",
+                    $subject->getUrl('mploginascustomer/login/index', ['id' => $customerId])
+                )
             ], 60);
         }
     }

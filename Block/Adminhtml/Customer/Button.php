@@ -61,7 +61,7 @@ class Button extends GenericButton implements ButtonProviderInterface
     public function getButtonData()
     {
         $customerId = $this->getCustomerId();
-        $data = [];
+        $data       = [];
         if ($customerId && $this->_helper->isAllowLogin()) {
             $data = [
                 'label'      => __('Login as Customer'),
