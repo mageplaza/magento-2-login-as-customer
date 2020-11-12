@@ -89,7 +89,7 @@
                 </item>
             </argument>
         </column>
-        <column name="created_at">
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string" translate="true">Logged In At</item>
