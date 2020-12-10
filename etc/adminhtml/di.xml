@@ -24,4 +24,13 @@
     <type name="Magento\Sales\Block\Adminhtml\Order\View">
         <plugin name="add_login_button" type="Mageplaza\LoginAsCustomer\Plugin\AddButton"/>
     </type>
+    <type name="Magento\Ui\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="mploginascustomer_log_listing" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
