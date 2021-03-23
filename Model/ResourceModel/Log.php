@@ -36,6 +36,6 @@ class Log extends AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('mp_login_as_customer', 'log_id');
+        $this->_init('mageplaza_login_as_customer', 'log_id');
     }
 }

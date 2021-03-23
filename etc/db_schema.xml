@@ -21,7 +21,7 @@
  */
 -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="mp_login_as_customer" resource="default" engine="innodb" comment="Login As Customer Logs table">
+    <table name="mageplaza_login_as_customer" resource="default" engine="innodb" comment="Login As Customer Logs table">
         <column xsi:type="int" name="log_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
         <column xsi:type="int" name="admin_id" padding="10" unsigned="true" nullable="false" default="0" comment="Admin ID"/>
         <column xsi:type="varchar" name="admin_email" length="255" comment="Admin Email"/>
