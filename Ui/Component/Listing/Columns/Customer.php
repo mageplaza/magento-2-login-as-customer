@@ -75,7 +75,8 @@ class Customer extends Column
 
                 $customer = $this->customerRepository->getById($customerId);
                 if ($customer && $customer->getId()) {
-                    $item['customer_id'] = $customer->getFirstname() . ' ' . $customer->getLastname() . ' <' . $customer->getEmail() . '>';
+                    $item['customer_id'] = $customer->getFirstname() . ' ' .
+                        $customer->getLastname() . ' <' . $customer->getEmail() . '>';
                 } else {
                     $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
                 }
