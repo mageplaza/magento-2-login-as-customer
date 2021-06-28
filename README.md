@@ -152,7 +152,7 @@ From **Admin panel**, select `Report > Customer > Login as Customer Logs`
 - [Magento 2 Layered Navigation](https://github.com/mageplaza/magento-2-ajax-layered-navigation)
 - [Magento 2 security](https://github.com/mageplaza/magento-2-security)
 
-**Get more Magento 2 extension on Marketplace:**
+**Get more [Magento 2 extension on Marketplace](https://marketplace.magento.com/partner/Mageplaza):**
 - [Magento 2 Configurable Product Preselect](https://marketplace.magento.com/mageplaza-module-configurable-product-grid-view.html)
 - [Magento 2 Payment Restriction](https://marketplace.magento.com/mageplaza-module-payment-restriction.html)
 - [Magento 2 Frequently Bought Together](https://marketplace.magento.com/mageplaza-module-frequently-bought-together.html)
