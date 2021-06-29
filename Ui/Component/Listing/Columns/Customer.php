@@ -21,6 +21,7 @@
 
 namespace Mageplaza\LoginAsCustomer\Ui\Component\Listing\Columns;
 
+use Exception;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -73,12 +74,17 @@ class Customer extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $customerId = $item['customer_id'];
 
-                $customer = $this->customerRepository->getById($customerId);
-                if ($customer && $customer->getId()) {
-                    $item['customer_id'] = $customer->getFirstname() . ' ' . $customer->getLastname() . ' <' . $customer->getEmail() . '>';
-                } else {
-                    $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
+                try {
+                    $customer = $this->customerRepository->getById($customerId);
+                    if ($customer && $customer->getId()) {
+                        $item['customer_id'] = $customer->getFirstname() . ' ' . $customer->getLastname() . ' <' . $customer->getEmail() . '>';
+                    } else {
+                        $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
+                    }
+                } catch (Exception $e) {
+                    continue;
                 }
+
             }
         }
 
