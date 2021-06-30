@@ -94,7 +94,6 @@ class Customer extends Column
                     $log = $this->_logFactory->create()->load($item['customer_id'], 'customer_id');
                     $log->delete();
                 }
-
             }
         }
 
