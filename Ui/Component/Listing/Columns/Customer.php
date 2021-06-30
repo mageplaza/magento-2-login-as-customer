@@ -79,10 +79,6 @@ class Customer extends Column
      */
     public function prepareDataSource(array $dataSource)
     {
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
-        $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $customerId = $item['customer_id'];
