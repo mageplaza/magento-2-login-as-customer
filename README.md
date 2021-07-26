@@ -37,6 +37,14 @@ A:  Yes, it is totally possible. From the report logs, you can hit the Export bu
 - Install via composer (recommend)
 - Run the following command in Magento 2 root folder:
 
+With Marketing Automation (recommend):
+```
+composer require mageplaza/module-login-as-customer mageplaza/module-smtp
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+
+Without Marketing Automation:
 ```
 composer require mageplaza/module-login-as-customer
 php bin/magento setup:upgrade
