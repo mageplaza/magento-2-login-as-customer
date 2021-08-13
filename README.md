@@ -26,7 +26,7 @@ A: You can quickly login customer’s account to get information from Order View
 
 **Q: I am a store owner, my store site has many admin accounts. How can I manage customers' login history?**
 
-A: The extension allows store owners to view access history. On the backend, please navigate Report > Customer > Login as Customer Logs. 
+A: Magento 2 Login as Customer extension allows store owners to view access history. On the backend, please navigate `Report > Customer > Login as Customer Logs`. 
 
 **Q: Is it possible to export logs data to save daily?**
 
@@ -37,6 +37,14 @@ A:  Yes, it is totally possible. From the report logs, you can hit the Export bu
 - Install via composer (recommend)
 - Run the following command in Magento 2 root folder:
 
+With Marketing Automation (recommend):
+```
+composer require mageplaza/module-login-as-customer mageplaza/module-smtp
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy
+```
+
+Without Marketing Automation:
 ```
 composer require mageplaza/module-login-as-customer
 php bin/magento setup:upgrade
@@ -100,7 +108,7 @@ The most common-used exported file formats are CSV and Excel XML.
 
 
 
-## 6. How to configure Login as Customer
+## 6. How to configure Magento 2 Login as Customer
 
 ### 6.1.Configuration
 
@@ -151,3 +159,15 @@ From **Admin panel**, select `Report > Customer > Login as Customer Logs`
 - [Magento 2 Same Order Number](https://github.com/mageplaza/magento-2-same-order-number)
 - [Magento 2 Layered Navigation](https://github.com/mageplaza/magento-2-ajax-layered-navigation)
 - [Magento 2 security](https://github.com/mageplaza/magento-2-security)
+
+**Get more [Magento 2 extension on Marketplace](https://marketplace.magento.com/partner/Mageplaza):**
+- [Magento 2 Configurable Product Preselect](https://marketplace.magento.com/mageplaza-module-configurable-product-grid-view.html)
+- [Magento 2 Payment Restriction](https://marketplace.magento.com/mageplaza-module-payment-restriction.html)
+- [Magento 2 Frequently Bought Together](https://marketplace.magento.com/mageplaza-module-frequently-bought-together.html)
+- [Magento 2 Shipping Rules](https://marketplace.magento.com/mageplaza-module-shipping-rules.html)
+- [Magento 2 Abandoned Cart Email](https://marketplace.magento.com/mageplaza-module-abandoned-cart-email.html)
+- [Magento 2 SMTP](https://marketplace.magento.com/mageplaza-module-smtp.html)
+- [Magento 2 Shipping Restrictions](https://marketplace.magento.com/mageplaza-module-shipping-restriction.html)
+- [Magento 2 Multiple Coupons](https://marketplace.magento.com/mageplaza-module-multiple-coupons.html)
+- [Magento 2 Order Attributes](https://marketplace.magento.com/mageplaza-module-order-attributes.html)
+- [Magento 2 Barcode](https://marketplace.magento.com/mageplaza-module-barcode.html)
