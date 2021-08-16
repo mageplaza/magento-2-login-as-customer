@@ -21,12 +21,14 @@
 
 namespace Mageplaza\LoginAsCustomer\Ui\Component\Listing\Columns;
 
+use Exception;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Mageplaza\LoginAsCustomer\Model\LogFactory;
 
 /**
  * Class Customer
@@ -40,11 +42,17 @@ class Customer extends Column
     protected $customerRepository;
 
     /**
+     * @var LogFactory
+     */
+    protected $_logFactory;
+
+    /**
      * Customer constructor.
      *
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param CustomerRepository $customerRepository
+     * @param LogFactory $logFactory
      * @param array $components
      * @param array $data
      */
@@ -52,10 +60,12 @@ class Customer extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         CustomerRepository $customerRepository,
+        LogFactory $logFactory,
         array $components = [],
         array $data = []
     ) {
         $this->customerRepository = $customerRepository;
+        $this->_logFactory        = $logFactory;
 
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
@@ -73,11 +83,16 @@ class Customer extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $customerId = $item['customer_id'];
 
-                $customer = $this->customerRepository->getById($customerId);
-                if ($customer && $customer->getId()) {
-                    $item['customer_id'] = $customer->getFirstname() . ' ' . $customer->getLastname() . ' <' . $customer->getEmail() . '>';
-                } else {
-                    $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
+                try {
+                    $customer = $this->customerRepository->getById($customerId);
+                    if ($customer && $customer->getId()) {
+                        $item['customer_id'] = $customer->getFirstname() . ' ' . $customer->getLastname() . ' <' . $customer->getEmail() . '>';
+                    } else {
+                        $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
+                    }
+                } catch (Exception $e) {
+                    $log = $this->_logFactory->create()->load($item['customer_id'], 'customer_id');
+                    $log->delete();
                 }
             }
         }
