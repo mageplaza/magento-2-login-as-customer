@@ -70,16 +70,14 @@ class Customer extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $customerId = $item['customer_id'];
                 try {
-                    $customer = $this->customerRepository->getById($customerId);
-                } catch (Exception $e) {
-                    $customer = null;
-                }
-                if ($customer && $customer->getId()) {
+                    $customer            = $this->customerRepository->getById($customerId);
                     $item['customer_id'] = $customer->getFirstname() . ' ' .
                         $customer->getLastname() . ' <' . $customer->getEmail() . '>';
-                } else {
-                    $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email'] . '>';
+                } catch (Exception $e) {
+                    $item['customer_id'] = $item['customer_name'] . ' <' . $item['customer_email']
+                        . '> Note: Customer\'s account has been deleted.';
                 }
+
             }
         }
 
