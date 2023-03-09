@@ -1,6 +1,8 @@
 
 # Magento 2 Login As Customer extension FREE
 
+> **(Update) 2023-03-09**: This project will be marked as a paid item and no longer be maintained as free. For further updates and technical support, please follow [Magento 2 Backend Tools](https://www.mageplaza.com/magento-2-backend-tools/) for more information. We understand that this change might create inconvenience for our users. However, this is to ensure that the module will be updated with more useful features to support Magento 2 stores better. If you have any concerns or ideas about any features you would like to see, don’t hesitate to [contact us](https://www.mageplaza.com/support/) and leave a request.
+
 [Magento 2 Login as Customer by Mageplaza](https://www.mageplaza.com/magento-2-login-as-customer/) supports the store admin to login to customers' account and automatically save that login data. In many cases, customers face some difficulty or inconvenience in My Account page, or right in the checkout step. Login as Customer module will be a great solution for such these circumstances. The store can have a quick view after access as a customer, as a result, this can save a significant amount of time for both administrator and customers.
 
 
